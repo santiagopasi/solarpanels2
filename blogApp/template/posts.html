@@ -1,0 +1,58 @@
+{%extends 'index.html'%}
+
+{%load static %}
+
+    {%block content%}
+    <h1 style="color: blue">{{mensaje}}</h1>
+    <table cellpadding="30px"cellspacing="15px">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Creación</th>
+            <th>Actualización</th>
+            <th>Autor</th>
+            <th>Tipo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr >
+            {%for post in posts%}
+            <td>{{post.titulo}}</td>
+            <td>{{post.creado}}</td>
+            <td>{{post.actualizado}}</td>
+            <td>{{post.creado_por}}</td>
+
+            {%if post.tipo_post == "Libro"%}
+            <td style="background-color: orange">{{post.tipo_post}}</td>
+            {%else%}
+            <td style="background-color: green">{{post.tipo_post}}</td>
+            {%endif%}
+
+            <td align="right">
+                
+                <a href="{% url 'PostIndividual' post.id %}" class="btn btn-secondary">Ver</a>
+            </td>
+            
+            {%if user.is_authenticated%}
+            {%if request.user.username == nombre_user %}
+            <td align="right">
+                
+                <a href="{% url 'EditarPost' post.id %}" class="btn btn-secondary">Editar</a>
+            </td>
+            <td align="right">
+                
+                <a href="{% url 'EliminarPost' post.id %}" class="btn btn-danger">Eliminar</a>
+            </td>
+            {%endif%}
+            {%endif%}
+            
+        </tr>
+        {%endfor%}
+    </tbody>
+  
+</table>
+
+
+
+
+    {%endblock content%}

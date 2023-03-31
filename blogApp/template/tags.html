@@ -1,0 +1,25 @@
+{%extends 'index.html'%}
+
+{%load static %}
+
+    {%block content%}
+    
+    <h3 style="color: red">
+        {{mensaje}}
+    </h3>
+    
+{% if mensaje != "Tag creado correctamente" and mensaje != "Tag ya existe" %}
+
+<form action="" method="POST">
+{%csrf_token%}
+{{nuevo_tag.as_p}}
+<input type="submit" value="Crear TAG" class="btn btn-secondary">
+
+</form>
+{%else%}
+<a href="{%url 'Tags'%}">Crear nuevo tag </a> o <a href="{%url 'Inicio'%}">Volver al inicio</a>
+
+{% endif %}
+
+    
+    {%endblock content%}

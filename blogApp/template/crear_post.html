@@ -1,0 +1,30 @@
+{%extends 'index.html'%}
+
+{%load static %}
+
+    {%block content%}
+    
+    <h3 style="color: red">
+        {{mensaje}}
+    </h3>
+    
+
+{%if request.user.is_authenticated%}
+<form action="" method="POST" enctype="multipart/form-data">
+{%csrf_token%}
+{{nuevo_post.as_p}}
+<p>
+    <a href="{%url 'Tags'%}">Dont you find a manufacturer?</a>
+</p>
+    
+<input type="submit" value="Crear Post" class="btn btn-secondary">
+</form>
+
+{%else%}
+<h3 style="color: rgb(255, 0, 149)">
+    You have to be registered to create a post
+</h3>
+{%endif%}
+
+
+    {%endblock content%}

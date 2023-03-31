@@ -1,0 +1,69 @@
+{%extends 'index.html'%}
+
+{%load static %}
+
+    {%block content%}
+    <div id="list1"></div>
+    <div id="spinner1">
+       
+          <button class="btn btn-primary" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Retrieving panels from the websites...
+          </button>
+    </div>
+    <script>
+        console.log("Hello World")
+        const spinner = document.getElementById("spinner1")
+        const list = document.getElementById("list1")
+        $.ajax({
+            type:'GET',
+            url:'/',
+            success: function(res){
+                setTimeout(()=>{
+                    spinner.classList.add('no-display')
+                    list.innerHTML += `
+                        <h2>
+                            Updated Solar Panels list from eBay and europe-solarstore.com from the cheapest one
+                        </h2>
+                        <table cellpadding="30px"cellspacing="15px">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Price (U$s)</th>
+                                    <th>Link</th>
+                                
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr >
+                                    {%for panel in panels%}
+
+                                    <td>{{panel.panel_title}}</td>
+                                    <td>{{panel.panel_price}}</td>
+                                    <td><a href="{{panel.panel_link}}" target="_blank">Go to publication</a>
+                                        
+                                    </td>
+                                    
+                                    
+                                </tr>
+                                {%endfor%}
+                                
+                            </tbody>
+                        
+                        </table>
+                    `
+
+                },400)
+
+                
+            },
+            error: function(er){
+                console.log('error')
+            }
+        })
+    </script>
+    
+
+
+
+    {%endblock content%}

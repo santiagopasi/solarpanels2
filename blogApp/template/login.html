@@ -1,0 +1,21 @@
+{%extends 'index.html'%}
+
+{%load static %}
+
+    {%block content%}
+    
+    <h3 style="color: red">
+        {{mensaje}}
+    </h3>
+    
+<form action="" method="POST">
+{%csrf_token%}
+{{form.as_p}}
+<input type="submit" value="Log in" class="btn btn-secondary">
+
+</form>
+
+<h3>Do you not have an user? </h3>
+<a href="{%url 'Registro'%}">Sign in</a>
+
+    {%endblock content%}

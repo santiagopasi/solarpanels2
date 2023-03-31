@@ -1,0 +1,59 @@
+{%extends 'index.html'%}
+
+{%load static %}
+
+    {%block content%}
+    
+
+
+
+
+{%if request.user.is_authenticated%}
+<h1>
+    Send your message, {{user.username}} 
+</h1>
+
+<form action="" method="POST">
+
+        {%csrf_token%}
+        {{form.as_p}}
+        <input type="submit" value="Enviar mensaje" class="btn btn-secondary">
+
+</form>
+
+<h2>
+    Recived messages
+</h2>
+
+<table cellpadding="30px"cellspacing="15px">
+    <thead>
+        <tr>
+            <th>Sent by</th>
+            <th>Sent at</th>
+            <th>Message</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        <tr >
+            {%for i in inbox%}
+            <td>{{i.sender}}</td>
+            <td>{{i.created_at}}</td>
+            <td>{{i.msg_content}}</td>  
+        </tr>
+        {%endfor%}
+    </tbody>
+  
+</table>
+
+
+
+{%else%}
+<h2>
+    {{mensaje}}
+</h2>
+{%endif%}
+
+
+
+    {%endblock content%}

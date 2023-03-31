@@ -1,0 +1,17 @@
+{%extends 'index.html'%}
+
+{%load static %}
+
+    {%block content%}
+    
+
+<h2>Edit profile of {{username}}</h2>
+    
+<form action="" method="POST">
+{%csrf_token%}
+{{formulario.as_p}}
+<input type="submit" value="Actualizar" class="btn btn-secondary">
+
+</form>
+
+    {%endblock content%}
